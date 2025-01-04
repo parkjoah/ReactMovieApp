@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      const [minutes, setMinutes] = React.useState();
+      const onChnage = () => {
+        console.log("sombody wrote");
+      };
+      return (
+        <div>
+          <h1 className="hi">Super Converter</h1>
+          <label hmtlFor="Minutes"></label>
+          <input
+            value={minutes}
+            id="Minutes"
+            placeholder="Minutes"
+            type="number"
+            onChange={onChnage}
+          />
+          <label hmtlFor="Hours"></label>
+          <input id="Hours" placeholder="Hours" type="number" />
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
