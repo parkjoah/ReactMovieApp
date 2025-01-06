@@ -8,23 +8,36 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     function App() {
-      const [minutes, setMinutes] = React.useState();
-      const onChnage = () => {
-        console.log("sombody wrote");
+      const [minutes, setMinutes] = React.useState(0);
+      const onChnage = (event) => {
+        setMinutes(event.target.value);
+      };
+      const reset = () => {
+        setMinutes(0);
       };
       return (
         <div>
           <h1 className="hi">Super Converter</h1>
-          <label hmtlFor="Minutes"></label>
-          <input
-            value={minutes}
-            id="Minutes"
-            placeholder="Minutes"
-            type="number"
-            onChange={onChnage}
-          />
-          <label hmtlFor="Hours"></label>
-          <input id="Hours" placeholder="Hours" type="number" />
+          <div>
+            <label hmtlFor="Minutes">Minutes</label>
+            <input
+              value={minutes}
+              id="Minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChnage}
+            />
+          </div>
+          <div>
+            <label hmtlFor="Hours">Hours</label>
+            <input
+              value={minutes / 60}
+              id="Hours"
+              placeholder="Hours"
+              type="number"
+            />
+          </div>
+          <button onClick={reset}>reset</button>
         </div>
       );
     }
