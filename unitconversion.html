@@ -7,7 +7,7 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function App() {
+    function MinutesToHours() {
       const [amount, setAmount] = React.useState(0);
       const [flipped, setFlipped] = React.useState(false);
       const onChange = (event) => {
@@ -20,7 +20,7 @@
       };
       return (
         <div>
-          <h1 className="hi">Super Converter</h1>
+          <h3>Minutes To Hours</h3>
           <div>
             <label hmtlFor="Minutes">Minutes</label>
             <input
@@ -45,6 +45,62 @@
           </div>
           <button onClick={reset}>reset</button>
           <button onClick={onFlip}>{flipped ? "M -> H" : "H -> M"}</button>
+        </div>
+      );
+    }
+    function KmToMiles() {
+      const [amount, setAmount] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
+      const onConvert = (event) => {
+        setAmount(event.target.value);
+      };
+      const onFlip = () => {
+        setFlipped((current) => !current);
+      };
+      return (
+        <div>
+          <h3>KM to Miles</h3>
+          <div>
+            <label htmlFor="KM">KM</label>
+            <input
+              id="KM"
+              value={flipped ? amount / 0.621371 : amount}
+              type="number"
+              onChange={onConvert}
+              disabled={flipped}
+            />
+          </div>
+          <div>
+            <label htmlFor="Miles">Miles</label>
+            <input
+              id="Miles"
+              value={flipped ? amount : amount * 0.621371}
+              type="number"
+              disabled={!flipped}
+              onChange={onConvert}
+            />
+          </div>
+          <button onClick={onFlip}>Flip</button>
+        </div>
+      );
+    }
+    function App() {
+      const [option, setOption] = React.useState();
+      const onSelect = (option) => {
+        setOption(option.target.value);
+      };
+      return (
+        <div>
+          <h1 className="hi">Super Converter</h1>
+          <select value={option} onChange={onSelect}>
+            <option value="xx">Select option</option>
+            <option value="0">Minutes To Hours</option>
+            <option value="1">KM to Miles</option>
+          </select>
+          <hr />
+          {option === "xx" ? "please Select Option." : null}
+          {option === "0" ? <MinutesToHours /> : null}
+          {option === "1" ? <KmToMiles /> : null}
         </div>
       );
     }
