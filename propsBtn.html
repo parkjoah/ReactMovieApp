@@ -3,31 +3,42 @@
   <body>
     <div id="root"></div>
   </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/prop-types/prop-types.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function Btn({ pizza }) {
+    function Btn({ pizza, changeValue, fontSize = 14 }) {
       return (
         <button
+          onClick={changeValue}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            // fontSize: big ? 18 : 15,
+            fontSize: fontSize,
           }}
         >
           {pizza}
         </button>
       );
     }
+    const MemorizedBtn = React.memo(Btn);
+    MemorizedBtn.propTypes = {
+      pizza: PropTypes.string,
+      fontSize: PropTypes.number,
+    };
     function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => {
+        setValue("Revert Changes");
+      };
       return (
         <div>
-          <Btn pizza="Save Changes" />
-          <Btn pizza="Confirm" />
+          <MemorizedBtn pizza={value} changeValue={changeValue} fontSize={18} />
+          <MemorizedBtn pizza={"Continue"} />
         </div>
       );
     }
